@@ -19,6 +19,7 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatListModule} from "@angular/material/list";
 import {MatSortModule} from "@angular/material/sort";
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -28,25 +29,26 @@ import {MatSortModule} from "@angular/material/sort";
     DeleteEmployeeComponent,
     EditEmployeeComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatTableModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
-    HttpClientModule,
-    MatDialogModule,
-    MatInputModule,
-    FormsModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    ReactiveFormsModule,
-    MatListModule,
-    MatSortModule
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatTableModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatIconModule,
+        HttpClientModule,
+        MatDialogModule,
+        MatInputModule,
+        FormsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        ReactiveFormsModule,
+        MatListModule,
+        MatSortModule,
+        MatSelectModule
 
-  ],
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

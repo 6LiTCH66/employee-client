@@ -17,7 +17,6 @@ export class DeleteEmployeeComponent implements OnInit {
 
   confirmDelete(): void{
     this.employeeService.deleteEmployee(this.employee.id)
-    //console.log(this.employee.id)
 
   }
 

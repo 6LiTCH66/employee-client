@@ -18,7 +18,7 @@ import {MatSort, Sort} from "@angular/material/sort";
 })
 export class AppComponent implements OnInit{
   title = 'employee-client';
-  displayedColumns: string[] = ['id', 'firstname', 'lastname', 'location', 'birthday', 'created_at', 'updated_at', 'actions'];
+  displayedColumns: string[] = ['id', 'firstname', 'lastname', 'location', 'birthday','email','telephone','created_at', 'updated_at', 'actions'];
   dataSource = new MatTableDataSource<Employee>();
 
 
@@ -46,16 +46,16 @@ export class AppComponent implements OnInit{
     });
   }
 
-  deleteEmployee(id: number, first_name: string, last_name:string, location:string, birthday:Date, created_at: Date, updated_at:Date){
+  deleteEmployee(id: number, first_name: string, last_name:string, location:string, birthday:Date,email:string,telephone:string, created_at: Date, updated_at:Date){
     this.dialog.open(DeleteEmployeeComponent, {
-      data: {id:id, first_name: first_name, last_name: last_name, location:location, birthday: birthday, created_at: created_at, updated_at:updated_at}
+      data: {id:id, first_name: first_name, last_name: last_name, location:location, birthday: birthday,email:email,telephone:telephone, created_at: created_at, updated_at:updated_at}
     }).afterClosed().subscribe(result => {
       this.refresh();
     })
   }
-  updateEmployee(id: number, first_name: string, last_name:string, location:string, birthday:Date){
+  updateEmployee(id: number, first_name: string, last_name:string, location:string, birthday:Date,email:string,telephone:string){
     this.dialog.open(EditEmployeeComponent, {
-      data: {id:id, first_name: first_name, last_name: last_name, location:location, birthday: birthday}
+      data: {id:id, first_name: first_name, last_name: last_name, location:location, birthday: birthday,email:email,telephone:telephone}
     }).afterClosed().subscribe(result => {
       this.refresh();
     })
