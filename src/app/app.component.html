@@ -25,6 +25,16 @@
     <mat-cell mat-cell *matCellDef="let element"> {{element.location}} </mat-cell>
   </ng-container>
 
+  <ng-container matColumnDef="email">
+    <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header="email"> Email </mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="telephone">
+    <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header="telephone"> Telephone </mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let element"> {{element.telephone}} </mat-cell>
+  </ng-container>
+
   <ng-container matColumnDef="birthday">
     <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header="birthday"> Birthday </mat-header-cell>
     <mat-cell mat-cell *matCellDef="let element"> {{element.birthday | date}} </mat-cell>
@@ -49,11 +59,11 @@
 
     <mat-cell mat-cell *matCellDef="let element; let i=index;">
       <button mat-icon-button color="accent">
-        <mat-icon aria-label="Edit" (click)="updateEmployee(element.id, element.first_name, element.last_name, element.location, element.birthday)">edit</mat-icon>
+        <mat-icon aria-label="Edit" (click)="updateEmployee(element.id, element.first_name, element.last_name, element.location, element.birthday,element.email, element.telephone)">edit</mat-icon>
       </button>
 
       <button mat-icon-button color="accent">
-        <mat-icon aria-label="Delete" (click)="deleteEmployee(element.id, element.first_name, element.last_name, element.location, element.birthday, element.created_at, element.updated_at)">delete</mat-icon>
+        <mat-icon aria-label="Delete" (click)="deleteEmployee(element.id, element.first_name, element.last_name, element.location, element.birthday,element.email, element.telephone, element.created_at, element.updated_at)">delete</mat-icon>
       </button>
     </mat-cell>
   </ng-container>

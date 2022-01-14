@@ -1,5 +1,6 @@
 
 <div class="container">
+  <h3 mat-dialog-title>Add new Employee</h3>
   <form mat-dialog-content #formControl="ngForm" class="mat-dialog-content" (ngSubmit)="submit">
 
     <div class="form">
@@ -21,8 +22,11 @@
     <div class="form">
       <mat-form-field appearance="fill">
         <mat-label>Location</mat-label>
-        <input matInput class="form-control" [(ngModel)]="employee.location" name="location" required>
-        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+        <mat-select [(ngModel)]="employee.location" (selectionChange)="getSelectedValue($event)" [formControl]="selectedValue" required>
+          <mat-option *ngFor="let city of cities" [value]="city.value">
+            {{city.viewValue}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
 
@@ -35,8 +39,24 @@
       </mat-form-field>
     </div>
 
+    <div class="form">
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput class="form-control" [(ngModel)]="employee.email" [formControl]="email" name="email" required>
+        <mat-error *ngIf="formControl.invalid">{{getErrorEmailMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field appearance="fill">
+        <mat-label>Telephone</mat-label>
+        <input matInput class="form-control" [(ngModel)]="employee.telephone" name="telephone" required [formControl]="telephone" maxlength="8" minlength="8">
+        <mat-error *ngIf="formControl.invalid">{{getErrorTelephoneMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
     <div mat-dialog-actions>
-      <button mat-button [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="confirmAdd()">Save</button>
+      <button mat-button [disabled]="!formControl.valid || !email.valid || !telephone.valid" [mat-dialog-close]="1" (click)="confirmAdd()">Save</button>
       <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
     </div>
 
