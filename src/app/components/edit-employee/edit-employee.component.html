@@ -1,0 +1,50 @@
+<div class="container">
+  <h3 mat-dialog-title>Employee id: {{employee.id}}</h3>
+  <form mat-dialog-content #formControl="ngForm" class="mat-dialog-content" (ngSubmit)="submit">
+    <div class="form">
+      <mat-form-field appearance="fill">
+        <mat-label>First name</mat-label>
+        <input matInput class="form-control" [(ngModel)]="employee.first_name" name="first_name" required>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field appearance="fill">
+        <mat-label>Last name</mat-label>
+        <input matInput class="form-control" [(ngModel)]="employee.last_name" name="last_name" required>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field appearance="fill">
+        <mat-label>Location</mat-label>
+        <input matInput class="form-control" [(ngModel)]="employee.location" name="location" required>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field appearance="fill">
+        <mat-label>Birthday</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="employee.birthday" name="birthday" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions>
+      <button mat-button [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="confirmUpdate()">Update</button>
+      <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+    </div>
+
+
+  </form>
+
+
+</div>
+
+
+
+
