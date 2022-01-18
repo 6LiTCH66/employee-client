@@ -20,6 +20,10 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatListModule} from "@angular/material/list";
 import {MatSortModule} from "@angular/material/sort";
 import {MatSelectModule} from '@angular/material/select';
+import { LoginComponent } from './components/login/login.component';
+import { RegistrationComponent } from './components/registration/registration.component';
+import {MatCardModule} from "@angular/material/card";
+import {CommonModule} from "@angular/common";
 
 
 @NgModule({
@@ -27,28 +31,31 @@ import {MatSelectModule} from '@angular/material/select';
     AppComponent,
     AddEmployeeComponent,
     DeleteEmployeeComponent,
-    EditEmployeeComponent
+    EditEmployeeComponent,
+    LoginComponent,
+    RegistrationComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatTableModule,
-        MatToolbarModule,
-        MatButtonModule,
-        MatIconModule,
-        HttpClientModule,
-        MatDialogModule,
-        MatInputModule,
-        FormsModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        ReactiveFormsModule,
-        MatListModule,
-        MatSortModule,
-        MatSelectModule
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    HttpClientModule,
+    MatDialogModule,
+    MatInputModule,
+    FormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    ReactiveFormsModule,
+    MatListModule,
+    MatSortModule,
+    MatSelectModule,
+    MatCardModule,
 
-    ],
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

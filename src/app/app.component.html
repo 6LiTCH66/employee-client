@@ -1,5 +1,7 @@
 <mat-toolbar color="primary">
   <span>Employee</span>
+  <a  mat-button  routerLink="/login">Login</a>
+  <a  mat-button  routerLink="/register">Registration</a>
 </mat-toolbar>
 <mat-table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort (matSortChange)="announceSortChange($event)" >
 
