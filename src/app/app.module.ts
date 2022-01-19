@@ -23,7 +23,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import {MatCardModule} from "@angular/material/card";
-import {CommonModule} from "@angular/common";
+import { TableComponent } from './components/table/table.component';
 
 
 @NgModule({
@@ -33,7 +33,8 @@ import {CommonModule} from "@angular/common";
     DeleteEmployeeComponent,
     EditEmployeeComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    TableComponent,
   ],
   imports: [
     BrowserModule,

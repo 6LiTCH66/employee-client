@@ -1,15 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {HttpClientModule} from "@angular/common/http";
-import {DatePipe} from "@angular/common";
-import {EmployeeService} from './services/employee.service'
-import {MatTableDataSource} from "@angular/material/table";
-import {AddEmployeeComponent} from "./components/add-employee/add-employee.component";
-import {MatDialog} from "@angular/material/dialog";
-import {Employee} from "./models/employee";
-import {DeleteEmployeeComponent} from "./components/delete-employee/delete-employee.component";
-import {EditEmployeeComponent} from "./components/edit-employee/edit-employee.component";
-import {LiveAnnouncer} from "@angular/cdk/a11y";
-import {MatSort, Sort} from "@angular/material/sort";
+import {Component, OnInit} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+
+import {AuthService} from "./services/auth.service";
+import {Emitters} from "./emitters/emitters";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -17,59 +11,23 @@ import {MatSort, Sort} from "@angular/material/sort";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
+  authenticated = false
   title = 'employee-client';
-  displayedColumns: string[] = ['id', 'firstname', 'lastname', 'location', 'birthday','email','telephone','created_at', 'updated_at', 'actions'];
-  dataSource = new MatTableDataSource<Employee>();
+  constructor(private http: HttpClient, private authService: AuthService, private router: Router) {
 
-
-  constructor(private employees: EmployeeService, public dialog: MatDialog, private _liveAnnouncer: LiveAnnouncer) {}
-
-  @ViewChild(MatSort) sort!:MatSort;
-
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
   }
 
-  announceSortChange(sortState: Sort){
-    if (sortState.direction) {
-      this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
-    } else {
-      this._liveAnnouncer.announce('Sorting cleared');
-    }
-  }
-
-  addNew(){
-    this.dialog.open(AddEmployeeComponent, {
-      data: {employee: Employee}
-    }).afterClosed().subscribe(result => {
-      this.refresh();
-    });
-  }
-
-  deleteEmployee(id: number, first_name: string, last_name:string, location:string, birthday:Date,email:string,telephone:string, created_at: Date, updated_at:Date){
-    this.dialog.open(DeleteEmployeeComponent, {
-      data: {id:id, first_name: first_name, last_name: last_name, location:location, birthday: birthday,email:email,telephone:telephone, created_at: created_at, updated_at:updated_at}
-    }).afterClosed().subscribe(result => {
-      this.refresh();
-    })
-  }
-  updateEmployee(id: number, first_name: string, last_name:string, location:string, birthday:Date,email:string,telephone:string){
-    this.dialog.open(EditEmployeeComponent, {
-      data: {id:id, first_name: first_name, last_name: last_name, location:location, birthday: birthday,email:email,telephone:telephone}
-    }).afterClosed().subscribe(result => {
-      this.refresh();
-    })
-  }
-
-  refresh() {
-    this.employees.getEmployees().subscribe((data) => {
-      this.dataSource.data = data;
-    })
+  logout(){
+    this.authService.logout()
+    this.authenticated = false
+    localStorage.removeItem("currentUser")
+    this.router.navigate(["/login"])
   }
 
 
   ngOnInit(): void {
-    this.refresh();
+    Emitters.authEmitters.subscribe((auth: boolean) => {
+      this.authenticated = auth
+    })
   }
-
 }

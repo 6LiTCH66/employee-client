@@ -10,6 +10,7 @@ import {Employee} from "../models/employee";
 export class EmployeeService {
   private readonly URL = 'https://employee-webserver.herokuapp.com/api/employee/'
 
+
   dataChange: BehaviorSubject<Employee[]> = new BehaviorSubject<Employee[]>([]);
 
   dialogData: any;
@@ -21,21 +22,21 @@ export class EmployeeService {
   }
 
   getEmployees(): Observable<Employee[]>{
-    return this.http.get<Employee[]>(this.URL);
+    return this.http.get<Employee[]>(this.URL, {withCredentials: true});
   }
 
   addEmployee(employee: Employee): void{
-    this.http.post(this.URL, employee).subscribe(data => {
+    this.http.post(this.URL, employee, {withCredentials: true}).subscribe(data => {
       this.dialogData = employee;
     })
   }
 
   deleteEmployee(id: number): void{
-    this.http.delete(this.URL + id).subscribe(() => {});
+    this.http.delete(this.URL + "/" + id, {withCredentials: true}).subscribe(() => {});
   }
 
   updateEmployee(employee: Employee): void{
-    this.http.put(this.URL + employee.id, employee).subscribe(data =>[
+    this.http.put(this.URL + "/"+employee.id, employee, {withCredentials: true}).subscribe(data =>[
       this.dialogData = employee
     ])
   }
