@@ -73,18 +73,17 @@ export class TableComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.refresh();
+
     if(localStorage.getItem("currentUser")){
       this.newToken = setInterval(() => {
         this.http.post(this.TOKEN_URL, "", {withCredentials: true}).subscribe(()=>{})
-      }, 14 * 60 * 1000)
+      }, 10000)
 
     }
   }
 
   ngOnDestroy() {
-    if(!localStorage.getItem("currentUser")){
-      clearInterval(this.newToken);
-    }
+    clearInterval(this.newToken);
 
   }
 
