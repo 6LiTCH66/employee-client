@@ -18,7 +18,7 @@ import {Emitters} from "../../emitters/emitters";
   styleUrls: ['./table.component.css']
 })
 export class TableComponent implements OnInit, OnDestroy {
-  private readonly TOKEN_URL = 'http://localhost:8080/auth/token'
+  private readonly TOKEN_URL = 'https://employee-webserver.herokuapp.com/auth/token'
 
   displayedColumns: string[] = ['id', 'firstname', 'lastname', 'location', 'birthday','email','telephone','created_at', 'updated_at', 'actions'];
   dataSource = new MatTableDataSource<Employee>();

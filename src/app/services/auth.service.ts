@@ -23,7 +23,7 @@ export class AuthService {
 
   logout(){
     this.http.post(this.AUTH_URL + "/logout", "",{withCredentials: true}).subscribe(res => {
-      // localStorage.removeItem("currentUser")
+      localStorage.removeItem("currentUser")
     })
   }
 
