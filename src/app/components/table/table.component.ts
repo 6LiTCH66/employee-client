@@ -16,7 +16,7 @@ import {Emitters} from "../../emitters/emitters";
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
-export class TableComponent implements OnInit, OnDestroy {
+export class TableComponent implements OnInit {
   private readonly TOKEN_URL = 'https://employee-webserver.herokuapp.com/auth/token'
 
   displayedColumns: string[] = ['id', 'firstname', 'lastname', 'location', 'birthday','email','telephone','created_at', 'updated_at', 'actions'];
@@ -73,17 +73,17 @@ export class TableComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.refresh();
-    if(localStorage.getItem("currentUser")){
-      this.newToken = setInterval(() => {
-        this.http.post(this.TOKEN_URL, "", {withCredentials: true}).subscribe(()=>{})
-      }, 14 * 60 * 1000)
-
-    }
+    // if(localStorage.getItem("currentUser")){
+    //   this.newToken = setInterval(() => {
+    //     this.http.post(this.TOKEN_URL, "", {withCredentials: true}).subscribe(()=>{})
+    //   }, 14 * 60 * 1000)
+    //
+    // }
   }
 
-  ngOnDestroy() {
-    clearInterval(this.newToken);
-
-  }
+  // ngOnDestroy() {
+  //   clearInterval(this.newToken);
+  //
+  // }
 
 }
