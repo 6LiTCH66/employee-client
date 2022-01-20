@@ -9,7 +9,6 @@ import {AddEmployeeComponent} from "../add-employee/add-employee.component";
 import {DeleteEmployeeComponent} from "../delete-employee/delete-employee.component";
 import {EditEmployeeComponent} from "../edit-employee/edit-employee.component";
 import {HttpClient} from "@angular/common/http";
-import {interval} from "rxjs";
 import {Emitters} from "../../emitters/emitters";
 
 @Component({
@@ -69,6 +68,7 @@ export class TableComponent implements OnInit, OnDestroy {
       Emitters.authEmitters.emit(false)
     })
   }
+
   newToken:any;
 
   ngOnInit(): void {
@@ -77,12 +77,15 @@ export class TableComponent implements OnInit, OnDestroy {
       this.newToken = setInterval(() => {
         this.http.post(this.TOKEN_URL, "", {withCredentials: true}).subscribe(()=>{})
       }, 14 * 60 * 1000)
-    }
 
+    }
   }
 
   ngOnDestroy() {
-    clearInterval(this.newToken);
+    if(!localStorage.getItem("currentUser")){
+      clearInterval(this.newToken);
+    }
+
   }
 
 }
