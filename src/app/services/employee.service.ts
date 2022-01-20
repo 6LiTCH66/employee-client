@@ -32,11 +32,11 @@ export class EmployeeService {
   }
 
   deleteEmployee(id: number): void{
-    this.http.delete(this.URL + "/" + id, {withCredentials: true}).subscribe(() => {});
+    this.http.delete(this.URL + id, {withCredentials: true}).subscribe(() => {});
   }
 
   updateEmployee(employee: Employee): void{
-    this.http.put(this.URL + "/"+employee.id, employee, {withCredentials: true}).subscribe(data =>[
+    this.http.put(this.URL + employee.id, employee, {withCredentials: true}).subscribe(data =>[
       this.dialogData = employee
     ])
   }
