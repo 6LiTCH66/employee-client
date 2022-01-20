@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {AuthService} from "./services/auth.service";
 import {Emitters} from "./emitters/emitters";
 import {Router} from "@angular/router";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-root',
@@ -25,6 +26,7 @@ export class AppComponent implements OnInit{
 
 
   ngOnInit(): void {
+    this.authService.startRefreshTokenTimer()
     Emitters.authEmitters.subscribe((auth: boolean) => {
       this.authenticated = auth
     })
