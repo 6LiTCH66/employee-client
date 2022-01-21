@@ -10,6 +10,7 @@ import {DeleteEmployeeComponent} from "../delete-employee/delete-employee.compon
 import {EditEmployeeComponent} from "../edit-employee/edit-employee.component";
 import {HttpClient} from "@angular/common/http";
 import {Emitters} from "../../emitters/emitters";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-table',
@@ -22,7 +23,7 @@ export class TableComponent implements OnInit {
   displayedColumns: string[] = ['id', 'firstname', 'lastname', 'location', 'birthday','email','telephone','created_at', 'updated_at', 'actions'];
   dataSource = new MatTableDataSource<Employee>();
 
-  constructor(private employees: EmployeeService, public dialog: MatDialog, private _liveAnnouncer: LiveAnnouncer, private http: HttpClient) {}
+  constructor(private router: Router, private employees: EmployeeService, public dialog: MatDialog, private _liveAnnouncer: LiveAnnouncer, private http: HttpClient) {}
 
   @ViewChild(MatSort) sort!:MatSort;
 
@@ -61,10 +62,14 @@ export class TableComponent implements OnInit {
   }
 
   refresh() {
-    this.employees.getEmployees().subscribe((data) => {
+    this.employees.getEmployees().subscribe(
+      (data) => {
       this.dataSource.data = data;
       Emitters.authEmitters.emit(true)
     }, error => {
+        this.router.navigate(["/login"]).then(() => {
+          window.location.reload()
+        })
       Emitters.authEmitters.emit(false)
     })
   }

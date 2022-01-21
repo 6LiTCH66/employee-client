@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {map} from "rxjs/operators";
+import {catchError, map} from "rxjs/operators";
+import {throwError} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -40,10 +41,17 @@ export class AuthService {
 
 
   refreshToken(){
-    return this.http.post<any>(this.TOKEN_URL, {}, {withCredentials: true}).pipe(map((response) => {
+    return this.http.post<any>(this.TOKEN_URL, {},{withCredentials: true}).pipe(map((resp) => {
       this.startRefreshTokenTimer()
-      return response;
-    }))
+
+      return resp;
+    }, catchError(err => {
+      if (err.status === 403){
+        localStorage.removeItem("currentUser")
+        localStorage.removeItem("initialTime")
+      }
+      return throwError(err.message)
+    })))
   }
 
   private refreshTokenTimeout: any;
@@ -53,25 +61,25 @@ export class AuthService {
       var waitTime = 840000;
       var executionTime;
       var initialTime = localStorage.getItem("initialTime");
+
       if (initialTime === null) {
         localStorage.setItem("initialTime", String((new Date()).getTime()));
         executionTime = waitTime;
       }
       else {
         executionTime = parseInt(initialTime, 10) + waitTime - (new Date()).getTime();
-        if (executionTime < 0) executionTime = 0;
+        if (executionTime < 0) executionTime = 0
       }
 
-      this.refreshTokenTimeout = setTimeout(() => {
+      this.refreshTokenTimeout = setTimeout(() =>{
         this.refreshToken().subscribe()
-        localStorage.removeItem("initialTime");
+        localStorage.removeItem("initialTime")
       }, executionTime)
     }
 
   }
 
   stopRefreshTokenTimer(){
-    console.log("stopped")
     localStorage.removeItem("initialTime");
     clearInterval(this.refreshTokenTimeout)
   }

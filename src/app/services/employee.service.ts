@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {BehaviorSubject, Observable} from "rxjs";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {BehaviorSubject, Observable, throwError} from "rxjs";
+import { catchError } from 'rxjs/operators';
 import {Employee} from "../models/employee";
-
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,14 @@ export class EmployeeService {
   }
 
   getEmployees(): Observable<Employee[]>{
-    return this.http.get<Employee[]>(this.URL, {withCredentials: true});
+    return this.http.get<Employee[]>(this.URL, {withCredentials: true})
+      .pipe(catchError(err => {
+        if (err.status === 403){
+          localStorage.removeItem("currentUser")
+          localStorage.removeItem("initialTime")
+        }
+        return throwError(err.message)
+      }))
   }
 
   addEmployee(employee: Employee): void{
