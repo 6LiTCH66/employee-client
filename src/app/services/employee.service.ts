@@ -3,6 +3,7 @@ import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {BehaviorSubject, Observable, throwError} from "rxjs";
 import { catchError } from 'rxjs/operators';
 import {Employee} from "../models/employee";
+import {AuthService} from "./auth.service";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class EmployeeService {
 
   dialogData: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   get data(): Employee[] {
     return this.dataChange.value;

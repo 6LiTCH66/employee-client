@@ -16,6 +16,11 @@ export class AuthService {
 
   }
 
+  resetPassword(email: string, password: string, newPassword: string){
+    this.http.post<any>(this.AUTH_URL + "/change", {email, password, newPassword})
+      .subscribe(res => this.router.navigate(["/login"]))
+  }
+
 
   login(email: string, password: string){
     this.http.post<any>(this.AUTH_URL + "/signin", {email, password}, {withCredentials: true}).subscribe((response) => {

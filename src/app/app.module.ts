@@ -24,6 +24,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import {MatCardModule} from "@angular/material/card";
 import { TableComponent } from './components/table/table.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { TableComponent } from './components/table/table.component';
     LoginComponent,
     RegistrationComponent,
     TableComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,
