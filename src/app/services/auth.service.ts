@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {catchError, map} from "rxjs/operators";
 import {throwError} from "rxjs";
@@ -15,6 +15,13 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {
 
   }
+  errorMessage: any
+
+  verifyEmail(){
+    alert("email sent")
+    var email = localStorage.getItem("userEmail")
+    this.http.post<any>(this.AUTH_URL + "/resent-email/" + email, {}).subscribe(res => {})
+  }
 
   resetPassword(email: string, password: string, newPassword: string){
     this.http.post<any>(this.AUTH_URL + "/change", {email, password, newPassword})
@@ -26,14 +33,21 @@ export class AuthService {
     this.http.post<any>(this.AUTH_URL + "/signin", {email, password}, {withCredentials: true}).subscribe((response) => {
       localStorage.setItem("currentUser", JSON.stringify(response))
       localStorage.setItem("initialTime", String((new Date()).getTime()));
-
+      localStorage.removeItem("userEmail")
       this.startRefreshTokenTimer();
       this.router.navigate(["/"])
+    }, (err:HttpErrorResponse) => {
+      this.errorMessage = JSON.stringify(err.error)
+
+      // alert(JSON.stringify(err.error))
     })
   }
 
   register(email: string, password:string){
-    this.http.post(this.AUTH_URL + "/signup", {email, password}).subscribe(res => this.router.navigate(["/login"]))
+    this.http.post(this.AUTH_URL + "/signup", {email, password}).subscribe(res => {
+      this.router.navigate(["/verify-email"])
+      localStorage.setItem("userEmail", email)
+    })
   }
 
   logout(){

@@ -21,12 +21,14 @@ export class LoginComponent implements OnInit{
     if(this.email.value && this.password.value){
       this.authService.login(this.email.value, this.password.value)
     }
+
   }
   changePassword():void{
     this.router.navigate(["/change-password"])
   }
 
   ngOnInit(): void {
+
   }
 
 
