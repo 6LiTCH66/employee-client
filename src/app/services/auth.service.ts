@@ -3,6 +3,7 @@ import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {catchError, map} from "rxjs/operators";
 import {throwError} from "rxjs";
+import {Emitters} from "../emitters/emitters";
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,6 @@ export class AuthService {
   errorMessage: any
 
   verifyEmail(){
-    alert("email sent")
     var email = localStorage.getItem("userEmail")
     this.http.post<any>(this.AUTH_URL + "/resent-email/" + email, {}).subscribe(res => {})
   }
@@ -37,9 +37,8 @@ export class AuthService {
       this.startRefreshTokenTimer();
       this.router.navigate(["/"])
     }, (err:HttpErrorResponse) => {
-      this.errorMessage = JSON.stringify(err.error)
+      Emitters.errorEmitters.emit(JSON.stringify(err.error))
 
-      // alert(JSON.stringify(err.error))
     })
   }
 
@@ -47,6 +46,8 @@ export class AuthService {
     this.http.post(this.AUTH_URL + "/signup", {email, password}).subscribe(res => {
       this.router.navigate(["/verify-email"])
       localStorage.setItem("userEmail", email)
+    },(err:HttpErrorResponse) =>{
+      Emitters.errorEmitters.emit(JSON.stringify(err.error))
     })
   }
 

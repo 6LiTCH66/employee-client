@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {Router} from "@angular/router";
 import {FormControl, Validators} from "@angular/forms";
+import {Emitters} from "../../emitters/emitters";
+import {stringify} from "@angular/compiler/src/util";
+import {SnackBarComponent} from "../snack-bar/snack-bar.component";
 
 @Component({
   selector: 'app-registration',
@@ -10,7 +13,7 @@ import {FormControl, Validators} from "@angular/forms";
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor( private authService: AuthService, private router:Router) {
+  constructor( private authService: AuthService, private router:Router, private snack: SnackBarComponent) {
 
   }
 
@@ -21,6 +24,9 @@ export class RegistrationComponent implements OnInit {
 
     if(this.email.value && this.password.value){
       this.authService.register(this.email.value, this.password.value)
+      Emitters.errorEmitters.subscribe((error:string) => {
+        this.snack.openSnackBar(JSON.parse(error), false)
+      })
     }
 
 

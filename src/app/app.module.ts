@@ -26,7 +26,8 @@ import {MatCardModule} from "@angular/material/card";
 import { TableComponent } from './components/table/table.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
-
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { VerifyEmailComponent } from './components/verify-email/verify-email.com
     TableComponent,
     ChangePasswordComponent,
     VerifyEmailComponent,
+    SnackBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,9 +61,10 @@ import { VerifyEmailComponent } from './components/verify-email/verify-email.com
     MatSortModule,
     MatSelectModule,
     MatCardModule,
+    MatSnackBarModule,
 
   ],
-  providers: [],
+  providers: [SnackBarComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
