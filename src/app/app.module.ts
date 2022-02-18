@@ -28,6 +28,7 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
+import { UserTableComponent } from './components/user-table/user-table.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
     ChangePasswordComponent,
     VerifyEmailComponent,
     SnackBarComponent,
+    UserTableComponent,
   ],
   imports: [
     BrowserModule,

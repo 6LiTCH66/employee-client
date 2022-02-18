@@ -1,0 +1,42 @@
+
+<mat-table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort (matSortChange)="announceSortChange($event)" >
+
+  <ng-container matColumnDef="user_id">
+    <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header="user_id"> User id </mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let element"> {{element.user_id}} </mat-cell>
+  </ng-container>
+
+
+  <ng-container matColumnDef="login_at">
+    <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header="login_at"> Login at </mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let element"> {{element.login_at}} </mat-cell>
+  </ng-container>
+
+
+  <ng-container matColumnDef="logout_at">
+    <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header="logout_at"> Logout at </mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let element"> {{element.logout_at}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="ip">
+    <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header="ip"> Ip </mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let element"> {{element.ip}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="agent">
+    <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header="agent"> Agent </mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let element"> {{element.agent}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="isOnline">
+    <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header="isOnline"> Online </mat-header-cell>
+    <mat-cell mat-cell *matCellDef="let element"> {{element.isOnline}} </mat-cell>
+  </ng-container>
+
+
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let element; columns: displayedColumns;"></mat-row>
+</mat-table>
+
+
