@@ -29,6 +29,8 @@ import { VerifyEmailComponent } from './components/verify-email/verify-email.com
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
 import { UserTableComponent } from './components/user-table/user-table.component';
+import {MatChipsModule} from "@angular/material/chips";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 @NgModule({
   declarations: [
@@ -64,6 +66,8 @@ import { UserTableComponent } from './components/user-table/user-table.component
     MatSelectModule,
     MatCardModule,
     MatSnackBarModule,
+    MatChipsModule,
+    MatAutocompleteModule,
 
   ],
   providers: [SnackBarComponent],

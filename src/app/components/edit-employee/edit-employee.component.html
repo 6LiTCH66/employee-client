@@ -1,6 +1,7 @@
 <div class="container">
   <h3 mat-dialog-title>Employee id: {{employee.id}}</h3>
   <form mat-dialog-content #formControl="ngForm" class="mat-dialog-content" (ngSubmit)="submit">
+
     <div class="form">
       <mat-form-field appearance="fill">
         <mat-label>First name</mat-label>
@@ -9,6 +10,7 @@
       </mat-form-field>
     </div>
 
+
     <div class="form">
       <mat-form-field appearance="fill">
         <mat-label>Last name</mat-label>
@@ -16,6 +18,10 @@
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
     </div>
+
+
+
+
 
     <div class="form">
       <mat-form-field appearance="fill">
@@ -52,6 +58,7 @@
         <mat-error *ngIf="formControl.invalid">{{getErrorTelephoneMessage()}}</mat-error>
       </mat-form-field>
     </div>
+
 
     <div mat-dialog-actions>
       <button mat-button [disabled]="!formControl.valid || !email.valid || !telephone.valid" [mat-dialog-close]="1" (click)="confirmUpdate()">Update</button>

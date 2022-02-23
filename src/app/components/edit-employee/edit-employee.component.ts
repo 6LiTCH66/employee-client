@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {EmployeeService} from "../../services/employee.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {City} from "../../models/city";
+import {SnackBarComponent} from "../snack-bar/snack-bar.component";
 
 @Component({
   selector: 'app-edit-employee',
@@ -11,7 +12,7 @@ import {City} from "../../models/city";
 })
 export class EditEmployeeComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<EditEmployeeComponent>, @Inject(MAT_DIALOG_DATA) public employee: any, public employeeService:EmployeeService) { }
+  constructor(public dialogRef: MatDialogRef<EditEmployeeComponent>, @Inject(MAT_DIALOG_DATA) public employee: any, public employeeService:EmployeeService, public snackBar: SnackBarComponent) { }
 
   employeeForm: any;
   selectedValue = new FormControl();
@@ -29,13 +30,14 @@ export class EditEmployeeComponent implements OnInit {
   formControl = new FormControl('', [
     Validators.required
   ])
+
   email = new FormControl('', [Validators.required, Validators.email]);
   telephone = new FormControl('', [Validators.pattern(this.MOBILE_PATTERN), Validators.maxLength(8)])
 
   getErrorMessage() {
-
     return this.formControl.hasError('required') ? 'Required field' : '';
   }
+
   getErrorEmailMessage() {
     return this.email.hasError('required') ? 'Required field' :
       this.email.hasError('email') ? 'Not a valid email' :
@@ -64,6 +66,9 @@ export class EditEmployeeComponent implements OnInit {
 
   confirmUpdate(): void{
     this.employeeService.updateEmployee(this.employee);
+    this.snackBar.openSnackBar("Data was successful updated", false)
+
   }
+
 
 }
