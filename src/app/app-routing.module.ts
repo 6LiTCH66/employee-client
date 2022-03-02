@@ -7,6 +7,7 @@ import {AuthGuard} from "./security/auth.guard";
 import {ChangePasswordComponent} from "./components/change-password/change-password.component";
 import {VerifyEmailComponent} from "./components/verify-email/verify-email.component";
 import {UserTableComponent} from "./components/user-table/user-table.component";
+import {VastusedComponent} from "./components/vastused/vastused.component";
 
 const routes: Routes = [
   { path: '', component: TableComponent, pathMatch: "full", canActivate: [AuthGuard]},
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'register', component: RegistrationComponent },
   { path: 'change-password', component: ChangePasswordComponent},
   {path: 'verify-email', component: VerifyEmailComponent},
-  {path: 'user', component: UserTableComponent}
+  {path: 'user', component: UserTableComponent},
+  {path: "vastused", component:VastusedComponent }
 ];
 
 @NgModule({

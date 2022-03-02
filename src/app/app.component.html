@@ -1,6 +1,7 @@
 <mat-toolbar color="primary">
   <a  mat-button  routerLink="/" *ngIf="authenticated">Employee</a>
   <a  mat-button  routerLink="/user" *ngIf="authenticated">Users</a>
+  <a  mat-button  routerLink="/vastused" *ngIf="authenticated">Vastused.ee</a>
 
   <a  mat-button  routerLink="/login" *ngIf="!authenticated">Login</a>
   <a  mat-button  routerLink="/register" *ngIf="!authenticated">Registration</a>

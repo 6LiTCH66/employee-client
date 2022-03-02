@@ -1,0 +1,14 @@
+.btnContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 30px;
+}
+button{
+  margin: 10px;
+}
+
+table {
+  width: 100%;
+}
+

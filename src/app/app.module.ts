@@ -31,6 +31,8 @@ import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
 import { UserTableComponent } from './components/user-table/user-table.component';
 import {MatChipsModule} from "@angular/material/chips";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import { VastusedComponent } from './components/vastused/vastused.component';
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 @NgModule({
   declarations: [
@@ -45,31 +47,33 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
     VerifyEmailComponent,
     SnackBarComponent,
     UserTableComponent,
+    VastusedComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatTableModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
-    HttpClientModule,
-    MatDialogModule,
-    MatInputModule,
-    FormsModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    ReactiveFormsModule,
-    MatListModule,
-    MatSortModule,
-    MatSelectModule,
-    MatCardModule,
-    MatSnackBarModule,
-    MatChipsModule,
-    MatAutocompleteModule,
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatTableModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatIconModule,
+        HttpClientModule,
+        MatDialogModule,
+        MatInputModule,
+        FormsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        ReactiveFormsModule,
+        MatListModule,
+        MatSortModule,
+        MatSelectModule,
+        MatCardModule,
+        MatSnackBarModule,
+        MatChipsModule,
+        MatAutocompleteModule,
+        MatPaginatorModule,
 
-  ],
+    ],
   providers: [SnackBarComponent],
   bootstrap: [AppComponent]
 })
