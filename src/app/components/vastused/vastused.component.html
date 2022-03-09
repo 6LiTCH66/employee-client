@@ -29,12 +29,12 @@
 
     <ng-container matColumnDef="question_title">
       <th mat-header-cell *matHeaderCellDef> Question title </th>
-      <td mat-cell *matCellDef="let element"> {{element.question_title}} </td>
+      <td mat-cell *matCellDef="let element" [innerHTML]="element.question_title">{{element.question_title}}</td>
     </ng-container>
 
     <ng-container matColumnDef="question_description">
       <th mat-header-cell *matHeaderCellDef> Question description </th>
-      <td mat-cell *matCellDef="let element"> {{element.question_description}} </td>
+      <td mat-cell *matCellDef="let element" [innerHTML]="element.question_description"> {{element.question_description}} </td>
     </ng-container>
 
     <ng-container matColumnDef="question_date">
@@ -44,17 +44,27 @@
 
     <ng-container matColumnDef="answer_title">
       <th mat-header-cell *matHeaderCellDef> Answer title </th>
-      <td mat-cell *matCellDef="let element"> {{element.answer_title}} </td>
+      <td mat-cell *matCellDef="let element"> {{ element.answer_title}} </td>
     </ng-container>
 
     <ng-container matColumnDef="answer_description">
       <th mat-header-cell *matHeaderCellDef> Answer description </th>
-      <td mat-cell *matCellDef="let element"> {{element.answer_description}} </td>
+      <td mat-cell *matCellDef="let element" [innerHTML]="element.answer_description"> {{element.answer_description}} </td>
     </ng-container>
 
     <ng-container matColumnDef="source">
       <th mat-header-cell *matHeaderCellDef> source </th>
-      <td mat-cell *matCellDef="let element"> {{element.source}} </td>
+      <td mat-cell *matCellDef="let element">{{element.source}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Add highlight</th>
+
+      <td mat-cell *matCellDef="let element; let i=index;">
+        <button mat-icon-button color="accent">
+          <mat-icon aria-label="Edit" (click)="addHighlights(element.id, element.question_title, element.question_description, element.answer_description)">edit</mat-icon>
+        </button>
+      </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

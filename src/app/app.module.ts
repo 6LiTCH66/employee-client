@@ -33,6 +33,7 @@ import {MatChipsModule} from "@angular/material/chips";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import { VastusedComponent } from './components/vastused/vastused.component';
 import {MatPaginatorModule} from "@angular/material/paginator";
+import { AddHighlightComponent } from './components/add-highlight/add-highlight.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     SnackBarComponent,
     UserTableComponent,
     VastusedComponent,
+    AddHighlightComponent,
   ],
     imports: [
         BrowserModule,

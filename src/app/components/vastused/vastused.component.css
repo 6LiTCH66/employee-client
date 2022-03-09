@@ -1,3 +1,4 @@
+
 .btnContainer{
   display: flex;
   align-items: center;
@@ -10,5 +11,8 @@ button{
 
 table {
   width: 100%;
+}
+.highlight{
+  background-color: yellow;
 }
 
