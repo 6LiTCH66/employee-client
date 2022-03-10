@@ -5,7 +5,7 @@
     <div class="form">
       <mat-form-field appearance="fill">
         <mat-label>Question title</mat-label>
-        <textarea matInput cdkTextareaAutosize class="form-control" [innerHTML]="vastused.question_title" [(ngModel)]="vastused.question_title" name="question_title" required (select)="questionTitleSelected($event)" readonly></textarea>
+        <textarea matInput cdkTextareaAutosize class="form-control" [innerHTML]="getInnerHTML(vastused.question_title)" name="question_title" required (select)="questionTitleSelected($event)" readonly></textarea>
       </mat-form-field>
       <button mat-raised-button color="accent" class="add-highlight" (click)="questionTitleText()">Question title highlight</button>
 
@@ -15,7 +15,7 @@
     <div class="form">
       <mat-form-field appearance="fill">
         <mat-label>Question description</mat-label>
-        <textarea matInput cdkTextareaAutosize class="form-control" [(ngModel)]="vastused.question_description" name="question_description" required (select)="questionDescriptionSelected($event)" readonly></textarea>
+        <textarea matInput cdkTextareaAutosize class="form-control" [innerHTML]="getInnerHTML(vastused.question_description)" name="question_description" required (select)="questionDescriptionSelected($event)" readonly></textarea>
       </mat-form-field>
       <button mat-raised-button color="accent" class="add-highlight" (click)="questionDescriptionText()">Question description highlight</button>
 
@@ -24,7 +24,7 @@
     <div class="form">
       <mat-form-field appearance="fill">
         <mat-label>Answer description</mat-label>
-        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" class="form-control" [(ngModel)]="vastused.answer_description" name="answer_description" required (select)="answerDescriptionSelected($event)" readonly></textarea>
+        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" class="form-control" [innerHTML]="getInnerHTML(vastused.answer_description)" name="answer_description" required (select)="answerDescriptionSelected($event)" readonly></textarea>
       </mat-form-field>
       <button mat-raised-button color="accent" class="add-highlight" (click)="answerDescriptionText()">Answer description highlight</button>
     </div>

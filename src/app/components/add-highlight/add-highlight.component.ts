@@ -15,6 +15,7 @@ export class AddHighlightComponent implements OnInit {
   onNoClick(): void{
     this.dialogRef.close()
   }
+
   questionTitHighlight!: string
   questionDescHighlight!: string
   answerDescHighlight!: string
@@ -58,6 +59,7 @@ export class AddHighlightComponent implements OnInit {
     if (this.questionTitHighlight){
       var toJson = {question_title:this.questionTitHighlight}
       this.vastusedService.updateVastused(toJson, this.vastused.id);
+      this.onNoClick();
     }
     else {
       this.snackBar.openSnackBar("Please highlight the text!", false)
@@ -69,6 +71,7 @@ export class AddHighlightComponent implements OnInit {
     if (this.questionDescHighlight){
       var toJson = {question_description:this.questionDescHighlight}
       this.vastusedService.updateVastused(toJson, this.vastused.id);
+      this.onNoClick();
     }
     else {
       this.snackBar.openSnackBar("Please highlight the text!", false)
@@ -79,15 +82,17 @@ export class AddHighlightComponent implements OnInit {
     if (this.answerDescHighlight){
       var toJson = {answer_description:this.answerDescHighlight}
       this.vastusedService.updateVastused(toJson, this.vastused.id);
+      this.onNoClick();
     }
     else {
       this.snackBar.openSnackBar("Please highlight the text!", false)
     }
 
-
   }
 
-
+  getInnerHTML(val: any){
+    return val.replace(/(<([^>]+)>)/ig,'');
+  }
 
 
 

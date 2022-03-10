@@ -7,6 +7,9 @@ import {WebScraping} from "../../models/WebScraping";
 import {MatDialog} from "@angular/material/dialog";
 import {AddHighlightComponent} from "../add-highlight/add-highlight.component";
 import { ViewEncapsulation } from '@angular/core'
+import {Emitters} from "../../emitters/emitters";
+import {Router} from "@angular/router";
+import * as _ from 'lodash';
 
 
 @Component({
@@ -33,23 +36,38 @@ export class VastusedComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  constructor(private webSocket: WebsocketService, private webScrapingService: WebscrapingService, public dialog: MatDialog) {
+  constructor(private router: Router, private webSocket: WebsocketService, private webScrapingService: WebscrapingService, public dialog: MatDialog) {
 
   }
   refresh(){
     this.webScrapingService.getVastused().subscribe(
       (data) => {
-        // data = data.map(d =>
-        // {d.answer_title = JSON.stringify(d.answer_title)
-        //   return d})
+        data = data.map(d =>
+        {d.answer_title = JSON.stringify(d.answer_title)
+          return d})
         this.dataSource.data = data
+        Emitters.authEmitters.emit(true)
+      }, error => {
+        this.router.navigate(["/login"]).then(() => {
+          window.location.reload()
+        })
+        Emitters.authEmitters.emit(false)
       }
     )
   }
 
+  // truncateText(text:any) {
+  //   return _.truncate(text, {
+  //     'length': 500,
+  //     'separator': ' '
+  //   })
+  // }
+
   addHighlights(id: number, question_title: string, question_description: string, answer_description:string): void{
     this.dialog.open(AddHighlightComponent, {
       data: {id: id, question_title: question_title, question_description:question_description, answer_description:answer_description}
+    }).afterClosed().subscribe(result => {
+      this.refresh()
     })
   }
 

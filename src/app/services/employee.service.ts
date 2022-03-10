@@ -44,9 +44,10 @@ export class EmployeeService {
   }
 
   updateEmployee(employee: Employee): void{
-    this.http.put(this.URL + employee.id, employee, {withCredentials: true}).subscribe(data =>[
+    this.http.put(this.URL + employee.id, employee, {withCredentials: true}).subscribe(data =>{
       this.dialogData = employee
-    ])
+    }
+    )
   }
 
 }

@@ -12,6 +12,7 @@ export class WebscrapingService {
   private readonly URL = "https://employee-webserver.herokuapp.com/scraping/vastused/"
   dataChange: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([])
 
+  dialogData: any;
 
   constructor(private http: HttpClient, public snackBar: SnackBarComponent) { }
 
@@ -26,7 +27,9 @@ export class WebscrapingService {
   updateVastused(bodyText: any, id: number): void{
     //alert(JSON.stringify(bodyText) + "\n" + this.URL + id)
     this.http.put(this.URL + id, bodyText, {withCredentials: true})
-      .subscribe(data =>  {})
+      .subscribe(data =>  {
+        this.dialogData = data
+      })
     this.snackBar.openSnackBar("Data was successful highlighted", false)
   }
 }
